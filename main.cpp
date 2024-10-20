@@ -4,7 +4,7 @@
 using namespace std;
 bool isValid(const wstring& s) {
     for (wchar_t i:s) {
-        if (!(i >= L'А' && i <= L'Я') || !iswupper(i)) {
+        if (!(i >= L'А' && i <= L'Я' || i == L'Ё') || !iswupper(i)) {
             return false;
         }
     }
