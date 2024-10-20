@@ -1,24 +1,10 @@
 #include <iostream>
 #include "modAlphaCipher.h"
 #include <locale>
-#include <cctype>
 using namespace std;
-bool issp(const wstring& s) {
-    bool sp = false;
-    for (wchar_t i : s) {
-        if (i == L' ') {
-            sp = true;
-            break;
-        }
-    }
-    if (sp) {
-        return false;
-    }
-    return true;
-}
 bool isValid(const wstring& s) {
     for (wchar_t i:s) {
-        if (!iswalpha(i) || !iswupper(i) || i == L' ') {
+        if (!(i >= L'А' && i <= L'Я') || !iswupper(i)) {
             return false;
         }
     }
@@ -33,7 +19,7 @@ int main(int argc, char *argv)
     unsigned int op;
     wcout << L"Шифровальщик готов. Введите ключ: ";
     wcin >> key;
-    if (!isValid(key) || !issp(key)) {
+    if (!isValid(key)) {
         wcerr << L"Неверный формат ключа\n";
         return 1;
     }
@@ -45,7 +31,7 @@ int main(int argc, char *argv)
         if (op > 2) {
             wcout << L"Неверный номер операции\n";
         } else if (op > 0) {
-            wcout << L"Шифровальщик готов. Введите текст для шифрования: ";
+            wcout << L"Шифровальщик готов. Введите текст: ";
             wcin >> text;
             if (isValid(text)) {
                 if (op == 1) {
